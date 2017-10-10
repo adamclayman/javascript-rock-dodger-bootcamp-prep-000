@@ -7,7 +7,38 @@ const RIGHT_ARROW = 39;
 const ROCKS = [];
 const START = document.getElementById('start');
 
+<<<<<<< HEAD
 var gameInterval = null;
+=======
+function checkCollision(rock) {
+  // implement me!
+  // use the comments below to guide you!
+  const top = positionToInteger(rock.style.top)
+
+  // rocks are 20px high
+  // DODGER is 20px high
+  // GAME_HEIGHT - 20 - 20 = 360px;
+  if (top > 360) {
+    const dodgerLeftEdge = positionToInteger(DODGER.style.left)
+    const rockLeftEdge = positionToInteger(rock.style.left)
+    const dodgerRightEdge = dodgerLeftEdge + 40; // the dodger is 40px x 20px (width x height convention)
+    const rockRightEdge = rockLeftEdge + 20; // the rocks are 20px wide
+
+    if (false /**
+               * Think about it -- what's happening here?
+               * There's been a collision if one of three things is true:
+               * 1. The rock's left edge is < the DODGER's left edge,
+               *    and the rock's right edge is > the DODGER's left edge;
+               * 2. The rock's left edge is > the DODGER's left edge,
+               *    and the rock's right edge is < the DODGER's right edge;
+               * 3. The rock's left edge is < the DODGER's right edge,
+               *    and the rock's right edge is > the DODGER's right edge
+               */) {
+      return true
+    }
+  }
+}
+>>>>>>> 0f8ac50df95402ce204d9aee7ea0d46b06548997
 
 function createRock(x) {
   const rock = document.createElement('div');
@@ -61,6 +92,18 @@ function positionToInteger(p) {
 }
 
 function moveDodger(e) {
+<<<<<<< HEAD
+=======
+  // implement me!
+  /**
+   * This function should call `moveDodgerLeft()`
+   * if the left arrow is pressed and `moveDodgerRight()`
+   * if the right arrow is pressed. (Check the constants
+   * we've declared for you above.)
+   * And be sure to use the functions declared below!
+   */
+
+>>>>>>> 0f8ac50df95402ce204d9aee7ea0d46b06548997
    if (e.which === LEFT_ARROW) {
      e.preventDefault();
      e.stopPropagation();
@@ -74,26 +117,65 @@ function moveDodger(e) {
 }
 
 function moveDodgerLeft() {
+<<<<<<< HEAD
    let dodgerLeftEdge = positionToInteger(DODGER.style.left);
 
    function step() {
      if (dodgerLeftEdge >= 4) {
        DODGER.style.left = `${dodgerLeftEdge -= 4}px`;
+=======
+  // implement me!
+  /**
+   * This function should move DODGER to the left
+   * (mabye 4 pixels?). Use window.requestAnimationFrame()!
+   */
+/*
+   it('moves the DODGER to the left', () => {
+     const left = positionToInteger(dodger.style.left)
+
+     moveDodgerLeft()
+
+     expect(positionToInteger(dodger.style.left)).toBeLessThan(left)
+   })
+*/
+   let dodgerLeftEdge = positionToInteger(DODGER.style.left); // This could fail if the string is '40px', and parseInt() doesn't know how to handle that.
+
+   function step() {
+     if (dodgerLeftEdge >= 4) {
+       DODGER.style.left = `${dodgerLeftEdge -= 4}px`
+//       window.requestAnimationFrame(step);
+>>>>>>> 0f8ac50df95402ce204d9aee7ea0d46b06548997
      }
    }
    window.requestAnimationFrame(step);
 }
 
 function moveDodgerRight() {
+<<<<<<< HEAD
    let dodgerLeftEdge = positionToInteger(DODGER.style.left);
    function step() {
      if (dodgerLeftEdge <= 356) {
        DODGER.style.left = `${dodgerLeftEdge += 4}px`;
+=======
+  // implement me!
+  /**
+   * This function should move DODGER to the right
+   * (mabye 4 pixels?). Use window.requestAnimationFrame()!
+   */
+
+   let dodgerLeftEdge = positionToInteger(DODGER.style.left); // This could fail if the string is '40px', and parseInt() doesn't know how to handle that.
+
+   function step() {
+     if (dodgerLeftEdge <= 356) {
+       DODGER.style.left = `${dodgerLeftEdge += 4}px`
+//       window.requestAnimationFrame(step);
+>>>>>>> 0f8ac50df95402ce204d9aee7ea0d46b06548997
      }
    }
    window.requestAnimationFrame(step);
 }
 
+<<<<<<< HEAD
 function endGame() {
   clearInterval(gameInterval);
   for (i=0; i<ROCKS.length; i++) {
@@ -114,6 +196,20 @@ function checkCollision(rock) {
     const rockLeftEdge = positionToInteger(rock.style.left);
     const dodgerRightEdge = dodgerLeftEdge + 40; // the dodger is 40px x 20px (width x height convention)
     const rockRightEdge = rockLeftEdge + 20; // the rocks are 20px wide
+=======
+/*
+ * @param {string} p The position property
+ * @returns {number} The position as an integer (without 'px')
+ */
+function positionToInteger(p) {
+  return parseInt(p.split('px')[0]) || 0
+}
+
+function start() {
+  window.addEventListener('keydown', moveDodger);
+
+  START.style.display = 'none';
+>>>>>>> 0f8ac50df95402ce204d9aee7ea0d46b06548997
 
     if (rockLeftEdge <= dodgerLeftEdge && rockRightEdge >= dodgerLeftEdge) { // Rock straddles dodger left edge
       return true;
